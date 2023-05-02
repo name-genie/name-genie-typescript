@@ -31,13 +31,13 @@ jobs:
           registry-url: 'https://registry.npmjs.org/'
           cache: 'pnpm'
 
-#      - name: Build
-#        run: pnpm build
-#
-#      - name: publish
-#        run: pnpm pub
-#        env:
-#          NODE_AUTH_TOKEN: '${{secrets.NAME_GENIE_NPM_TOKEN}}'
+      - name: Build
+        run: pnpm build
+
+      - name: publish
+        run: pnpm pub
+        env:
+          NODE_AUTH_TOKEN: '${{secrets.NAME_GENIE_NPM_TOKEN}}'
 
       - name: Extract version from package
         uses: sergeysova/jq-action@v2
