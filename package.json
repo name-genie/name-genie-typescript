@@ -1,8 +1,17 @@
 {
-  "name": "template",
-  "version": "1.0.0",
-  "description": "",
+  "name": "name-genie",
+  "version": "1.0.0-alpha.0",
+  "description": "一个用于生成名字的工具",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "umd": "./dist/index.umd.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
+    "fmt": "prettier --write ./src ./__tests__",
+    "test": "jest",
+    "build": "rimraf dist && rollup -c",
+    "pub": "bash scripts/publish.sh",
     "commit": "cz"
   },
   "config": {
@@ -12,8 +21,37 @@
   },
   "author": "lhlyu",
   "license": "MIT",
+  "keywords": [
+    "名字",
+    "生成器",
+    "name",
+    "generator",
+    "random"
+  ],
+  "files": [
+    "dist",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
   "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^24.1.0",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-terser": "^0.4.1",
+    "@types/jest": "^29.5.1",
     "commitizen": "^4.3.0",
-    "cz-git": "^1.6.1"
+    "cz-git": "^1.6.1",
+    "esno": "^0.16.3",
+    "jest": "^29.5.0",
+    "prettier": "^2.8.8",
+    "rimraf": "^5.0.0",
+    "rollup": "^3.21.2",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-typescript2": "^0.34.1",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.0.4"
   }
 }
