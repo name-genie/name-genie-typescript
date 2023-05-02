@@ -41,7 +41,10 @@ jobs:
 
       - name: Read package
         id: package
-        run: echo '::set-output name=version::$(node -p -e "require('\''./package.json'\'').version")'
+        run: echo "version=$(node -p -e "require('\''./package.json'\'').version")" >> $GITHUB_OUTPUT
+
+      - name: log
+        run: echo ${{ steps.package.outputs.version }}
 
       - name: Create Release
         uses: actions/create-release@v1
