@@ -1,8 +1,4 @@
-# template
-模板仓库
+# Name Genie Typescript
 
-## 说明
+一个用于生成名字的工具
 
-- `data`目录是子模块
-- 初始化子模块`git submodule init`
-- 更新子模块`git submodule update`

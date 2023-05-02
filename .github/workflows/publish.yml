@@ -31,22 +31,24 @@ jobs:
           registry-url: 'https://registry.npmjs.org/'
           cache: 'pnpm'
 
-      - name: Build
-        run: pnpm build
-
-      - name: publish
-        run: pnpm pub
-        env:
-          NODE_AUTH_TOKEN: '${{secrets.NAME_GENIE_NPM_TOKEN}}'
-
-      - name: Read package
-        id: package
-        run: echo "::set-output name=version::$(node -p -e \"require('./package.json').version\")"
+#      - name: Build
+#        run: pnpm build
+#
+#      - name: publish
+#        run: pnpm pub
+#        env:
+#          NODE_AUTH_TOKEN: '${{secrets.NAME_GENIE_NPM_TOKEN}}'
 
       - name: Create Release
         uses: actions/create-release@v1
         id: create_release
+        if: contains(steps.package.outputs.version, "-")
         with:
+          tag_name: v${{ steps.package.outputs.version }}
+          release_name: Release v${{ steps.package.outputs.version }}
+          draft: false
+          prerelease: true
+        else:
           tag_name: v${{ steps.package.outputs.version }}
           release_name: Release v${{ steps.package.outputs.version }}
           draft: false
