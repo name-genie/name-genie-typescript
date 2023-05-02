@@ -39,6 +39,10 @@ jobs:
 #        env:
 #          NODE_AUTH_TOKEN: '${{secrets.NAME_GENIE_NPM_TOKEN}}'
 
+      - name: Read package
+        id: package
+        run: echo "::set-output name=version::$(node -p -e \"require('./package.json').version\")"
+
       - name: Create Release
         uses: actions/create-release@v1
         id: create_release
