@@ -39,20 +39,22 @@ jobs:
 #        env:
 #          NODE_AUTH_TOKEN: '${{secrets.NAME_GENIE_NPM_TOKEN}}'
 
-      - name: Read package
-        id: package
-        run: echo "version=$(node -p -e "require('\''./package.json'\'').version")" >> $GITHUB_OUTPUT
-
-      - name: log
-        run: echo ${{ steps.package.outputs.version }}
-
-      - name: Create Release
-        uses: actions/create-release@v1
-        id: create_release
+      - name: Extract version from package
+        uses: sergeysova/jq-action@v2
+        id: version
         with:
-          tag_name: v${{ steps.package.outputs.version }}
-          release_name: Release v${{ steps.package.outputs.version }}
-          draft: false
-          prerelease: ${{ contains(steps.package.outputs.version, '-') }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.NAME_GENIE_TOKEN }}
+          cmd: 'jq .version package.json -r'
+
+      - name: Show my version
+        run: 'echo "version ${{ steps.version.outputs.value }}"'
+
+#      - name: Create Release
+#        uses: actions/create-release@v1
+#        id: create_release
+#        with:
+#          tag_name: v${{ steps.package.outputs.version }}
+#          release_name: Release v${{ steps.package.outputs.version }}
+#          draft: false
+#          prerelease: ${{ contains(steps.package.outputs.version, '-') }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.NAME_GENIE_TOKEN }}
