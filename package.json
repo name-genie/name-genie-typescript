@@ -1,6 +1,6 @@
 {
   "name": "name-genie",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0",
   "description": "一个用于生成名字的工具",
   "type": "module",
   "main": "./dist/index.js",
